@@ -1,4 +1,4 @@
-PRODUCT,DRAW NUMBER,SEQUENCE NUMBER,DRAW DATE,NUMBER DRAWN 1,NUMBER DRAWN 2,NUMBER DRAWN 3,NUMBER DRAWN 4,NUMBER DRAWN 5,NUMBER DRAWN 6,NUMBER DRAWN 7,BONUS NUMBER
+product,draw_number,sequence_number,draw_date,number_drawn_1,number_drawn_2,number_drawn_3,number_drawn_4,number_drawn_5,number_drawn_6,number_drawn_7,bonus_number
 LOTTO MAX,1,0,9/25/2009,5,17,19,25,31,38,46,4
 LOTTO MAX,2,0,10/2/2009,8,27,28,29,31,32,35,11
 LOTTO MAX,3,0,10/9/2009,5,15,25,38,42,46,47,26
