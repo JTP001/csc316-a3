@@ -19,6 +19,9 @@ let svg = d3.select("#circle-chart-area")
     .attr("width", WIDTH)
     .attr("height", HEIGHT);
 
+svg.style("display", "block")
+   .style("margin", "0 auto");
+
 let chartContainer = svg.append("g")
     .attr("class", "chart-container");
 
@@ -377,6 +380,9 @@ function resetVisualization() {
             svg.selectAll(".result-text").remove();
             drawRow.text("Your numbers: ");
             d3.select("#result-container").remove();
+
+            chartContainer.select(".size-legend")
+                .style("opacity", 1);
 
             renderCircleChart(getFilteredData());
 

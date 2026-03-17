@@ -14,7 +14,33 @@
 </head>
 
 <body class="d-flex justify-content-center">
-    <div id="circle-chart-area" class="text-center mt-4"></div>
+    <div class="container">
+        <!-- Top section -->
+        <div style="text-align: center; margin-bottom: 20px;">
+            <img 
+                src="images/Lotto_Max_Logo.png"
+                alt="Lotto Max Logo"
+                style="width: 300px; display: block; margin: 0 auto 20px auto;"
+            >
+
+            <div style="max-width: 800px; margin: 0 auto;">
+                <p>
+                    The odds of winning a lottery like the LOTTO MAX are incredibly low, but it's hard
+                    to really get a feel for how low your chances are just by looking at the odds.
+                    
+                </p>
+                <p>
+                    Try to recreate a winning LOTTO MAX sequence by selecting your seven draws, and see how long
+                    it takes you to get a sequence that has won before. Each time you select a number, the visualization
+                    will update to show the most frequently drawn numbers of each of the seven draws that make up
+                    a LOTTO MAX sequence.
+                </p>
+            </div>
+        </div>
+
+        <!-- Visualization -->
+        <div id="circle-chart-area" style="text-align: center;"></div>
+    </div>
 
     <!-- Load JS libraries: jQuery, bootstrap, D3 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
