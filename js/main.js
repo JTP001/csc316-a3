@@ -4,6 +4,13 @@ let GLOBAL_LOTTOMAX_DATA = [];
 let GLOBAL_DRAW_DATA = [];
 let CURRENT_DRAW_POSITION = 1;
 let USER_DRAW = [];
+const winningSequences = [
+  [5, 17, 19, 25, 31, 38, 46],
+  [8, 27, 28, 29, 31, 32, 35],
+  [5, 15, 25, 38, 42, 46, 47],
+  [4, 10, 18, 20, 31, 35, 44],
+  [4, 7, 10, 12, 23, 25, 36]
+];
 
 let drawRow = d3.select("#circle-chart-area")
     .insert("div", ":first-child")
@@ -29,7 +36,7 @@ chartContainer.append("circle")
     .attr("cx", WIDTH/2)
     .attr("cy", HEIGHT/2)
     .attr("r", WIDTH/2 - 5)
-    .attr("fill", "#79f770")
+    .attr("fill", "#72e96a")
     .attr("stroke-width", 3);
 
 let defs = svg.append("defs");
@@ -164,7 +171,6 @@ function aggregateData(lottomax_data) {
         }
     });
 
-    // convert maps to arrays (easier for D3)
     for (let drawPos = 1; drawPos <= 7; drawPos++) {
         result[drawPos] = Array.from(result[drawPos], ([number, count]) => ({
             number: number,
@@ -219,7 +225,11 @@ function renderCircleChart(data) {
         .on("mouseover", function(event, d) {
             tooltip.style("opacity", 1);
             tooltip.select(".tooltip-inner")
-                .html(`Number: ${d.data.number}<br>Count: ${d.data.count}`);
+                .html(`Number: <strong>${d.data.number}</strong>
+                    <br>
+                    Winning sequences with 
+                    <br>
+                    this draw: <strong>${d.data.count}</strong>`);
         })
         .on("mousemove", function(event) {
             tooltip
@@ -384,6 +394,16 @@ function resetVisualization() {
             chartContainer.select(".size-legend")
                 .style("opacity", 1);
 
+            sessionStorage.clear();
+            const hintSequenceContainer = document.getElementById("hint-sequence");
+            const circles = hintSequenceContainer.querySelectorAll(".circle");
+
+            circles.forEach(circle => {
+                circle.style.backgroundColor = "#000";
+                circle.textContent = "";
+                circle.dataset.revealed = "false";
+            });
+
             renderCircleChart(getFilteredData());
 
             svg.transition()
@@ -391,3 +411,61 @@ function resetVisualization() {
                 .style("opacity", 1);
         });
 }
+
+
+document.getElementById("how-to-play").addEventListener("click", function() {
+    var howToPlayModal = new bootstrap.Modal(document.getElementById('howToPlayModal'));
+    howToPlayModal.show();
+});
+
+
+document.getElementById("sequence-hint").addEventListener("click", function() {
+    var hintModal = new bootstrap.Modal(document.getElementById('hintModal'));
+    hintModal.show();
+
+    const hintSequenceContainer = document.getElementById("hint-sequence");
+    hintSequenceContainer.innerHTML = "";
+
+    winningSequences.forEach((sequence, seqIndex) => {
+        const sequenceContainer = document.createElement("div");
+        sequenceContainer.classList.add("d-flex", "justify-content-center", "mb-3");
+
+        sequence.forEach((number) => {
+            const circle = document.createElement("div");
+            circle.classList.add("circle");
+            circle.style.width = "40px";
+            circle.style.height = "40px";
+            circle.style.margin = "5px";
+            circle.style.borderRadius = "50%";
+            circle.style.backgroundColor = "#000";
+            circle.style.display = "flex";
+            circle.style.justifyContent = "center";
+            circle.style.alignItems = "center";
+            circle.style.cursor = "pointer";
+            circle.dataset.number = number;
+            circle.dataset.revealed = "false";
+            circle.dataset.sequenceIndex = seqIndex;
+
+            const revealedState = sessionStorage.getItem(`revealed-${seqIndex}-${number}`);
+            if (revealedState === "true") {
+                circle.style.backgroundColor = "#4ecbde";
+                circle.textContent = number;
+                circle.dataset.revealed = "true";
+            }
+
+            circle.addEventListener("click", function() {
+                if (circle.dataset.revealed === "false") {
+                    circle.style.backgroundColor = "#4ecbde";
+                    circle.textContent = number;
+                    circle.dataset.revealed = "true";
+
+                    sessionStorage.setItem(`revealed-${seqIndex}-${number}`, "true");
+                }
+            });
+
+            sequenceContainer.appendChild(circle);
+        });
+
+        hintSequenceContainer.appendChild(sequenceContainer);
+    });
+});

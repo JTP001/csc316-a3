@@ -25,16 +25,70 @@
 
             <div style="max-width: 800px; margin: 0 auto;">
                 <p>
-                    The odds of winning a lottery like the LOTTO MAX are incredibly low, but it's hard
+                    The odds of winning a lottery like the LOTTO MAX are <strong style="color: red">incredibly low</strong>, but it's hard
                     to really get a feel for how low your chances are just by looking at the odds.
                     
                 </p>
                 <p>
-                    Try to recreate a winning LOTTO MAX sequence by selecting your seven draws, and see how long
-                    it takes you to get a sequence that has won before. Each time you select a number, the visualization
-                    will update to show the most frequently drawn numbers of each of the seven draws that make up
-                    a LOTTO MAX sequence.
+                    Try to recreate a winning LOTTO MAX sequence by selecting each of your seven draws, and see how long
+                    it takes you to get a sequence that has won before. 
                 </p>
+                <br>
+                <div class="row">
+                    <div class="col-6">
+                        <button class="btn btn-outline-primary" id="how-to-play">How to play</button>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-outline-primary" id="sequence-hint">Hint</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="howToPlayModal" tabindex="-1" aria-labelledby="howToPlayModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="howToPlayModalLabel">How to Play</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                    The below visualization shows you the most often drawn number in each of the seven draws
+                    that make up a LOTTO MAX sequence, from a dataset of all the sequences that have won before. <br> <br>
+                    Clicking on a number adds it to your sequence, and then updates the visualization to show the most often
+                    drawn number in the second, third, etc draw of the sequence. Draw your seven numbers and test your luck!
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            
+            <div class="modal fade" id="hintModal" tabindex="-1" aria-labelledby="hintModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="hintModalLabel">Hint</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                    The odds that you get a sequence that has won before are very low, so if you can't seem to win, try
+                    using some of the hints below. You can reveal numbers one-by-one from one of these winning sequences,
+                    or show the whole things and get a guaranteed win! <br><br>
+                    </p>
+                    <div id="hint-sequence" class="d-flex justify-content-around" style="flex-wrap: wrap;">
+                    <!-- Dynamically added circles will appear here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
             </div>
         </div>
 

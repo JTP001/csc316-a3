@@ -1,1 +1,15 @@
+p {
+    font-size: 20px;
+}
 
+.circle {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 18px;
+    font-weight: bold;
+    color: white; /* Text color when revealed */
+    text-align: center;
+}
+
+#hint-sequence {
+    margin-top: 20px;
+}
